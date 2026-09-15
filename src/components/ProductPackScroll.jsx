@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useIsMobile } from '../hooks/useIsMobile'
+import { frameUrl } from '../lib/frames'
 
 const FRAME_COUNT = 120
 const MILESTONE_STEP = 10
 const MOBILE_FRAME_STEP = 2
-const frameUrl = (index) => `/frames/frame-${String(index + 1).padStart(4, '0')}.webp`
+// Delivered frame width: native 1440 on desktop, 1080 is plenty for phones/tablets.
+const DESKTOP_FRAME_WIDTH = 1440
+const MOBILE_FRAME_WIDTH = 1080
 
 export function ProductPackScroll({ mobileContent }) {
   const containerRef = useRef(null)
@@ -99,7 +102,7 @@ export function ProductPackScroll({ mobileContent }) {
       img.decoding = 'async'
       if ('fetchPriority' in img) img.fetchPriority = priority
       img.onload = () => handleImageLoad(index)
-      img.src = frameUrl(index)
+      img.src = frameUrl(index, { width: isMobile ? MOBILE_FRAME_WIDTH : DESKTOP_FRAME_WIDTH })
       imagesRef.current[index] = img
 
       return img

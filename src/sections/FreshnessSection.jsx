@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Leaf, MoveUpRight, CheckCircle2, Shield, RefreshCw, Award, Info } from 'lucide-react'
 import { Reveal } from '../components/Reveal'
+import { frameSrc } from '../lib/frames'
 
 const WOOD_FINISHES = [
   {
@@ -12,7 +13,7 @@ const WOOD_FINISHES = [
     origin: 'Black Forest, Germany (FSC-Certified)',
     oil: 'Organic Linseed & Carnauba Wax',
     durability: 'Grade A Hardwood · Janka 1,360 lbf',
-    image: '/frames/frame-0024.webp',
+    image: frameSrc('frame-0024', { width: 1200 }),
   },
   {
     id: 'walnut',
@@ -23,7 +24,7 @@ const WOOD_FINISHES = [
     origin: 'Appalachian Valley, USA',
     oil: 'Thermal Smoked Natural Resin',
     durability: 'Grade A Hardwood · Janka 1,010 lbf',
-    image: '/frames/frame-0048.webp',
+    image: frameSrc('frame-0048', { width: 1200 }),
   },
   {
     id: 'ash',
@@ -34,7 +35,7 @@ const WOOD_FINISHES = [
     origin: 'Småland, Sweden',
     oil: 'White Linseed Lye Finish',
     durability: 'Grade A Hardwood · Janka 1,320 lbf',
-    image: '/frames/frame-0078.webp',
+    image: frameSrc('frame-0078', { width: 1200 }),
   },
 ]
 

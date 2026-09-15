@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ArrowDownRight, ShieldCheck, Sparkles, ChevronRight } from 'lucide-react'
 import { Reveal } from '../components/Reveal'
+import { frameSrc } from '../lib/frames'
 
 const PHILOSOPHIES = [
   {
@@ -118,7 +119,7 @@ export function StorySection({ compact = false }) {
           {!compact && (
             <Reveal delay={0.08} className="group relative flex items-center overflow-hidden rounded-2xl border border-border bg-parchment shadow-xl md:rounded-3xl">
               <img
-                src="/frames/frame-0120.webp"
+                src={frameSrc('frame-0120', { width: 1200 })}
                 alt="Ambot365 signature lounge chair in solid oak and saddle leather"
                 className="aspect-[4/3] w-full object-cover transition-transform duration-1000 group-hover:scale-[1.03] md:aspect-[4/5]"
                 loading="lazy"

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ArrowUpRight, Sun, Sunset, Moon, Sliders, X, Ruler, Sparkles, Check, ChevronRight } from 'lucide-react'
 import { Reveal } from '../components/Reveal'
+import { frameSrc } from '../lib/frames'
 
 const CATEGORIES = ['All Pieces', 'Rest / Lounge', 'Gather / Dining', 'Focus / Studio', 'Pause / Low']
 
@@ -144,7 +145,7 @@ export function CollectionSection() {
               {/* Product Image Card with Spatial Lighting Filter */}
               <div className="relative overflow-hidden bg-parchment">
                 <img
-                  src={`/frames/${piece.image}`}
+                  src={frameSrc(piece.image, { width: 900 })}
                   alt={`${piece.name} - Ambot365 luxury furniture`}
                   className={`aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-105 ${activeLighting.filterClass}`}
                   loading="lazy"
@@ -207,7 +208,7 @@ export function CollectionSection() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
                   <div className="rounded-2xl overflow-hidden border border-border bg-parchment">
                     <img
-                      src={`/frames/${selectedProduct.image}`}
+                      src={frameSrc(selectedProduct.image, { width: 900 })}
                       alt={selectedProduct.name}
                       className={`w-full aspect-[4/5] object-cover ${activeLighting.filterClass}`}
                     />

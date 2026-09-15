@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { CircleGauge, Fingerprint, Recycle, Trees, Volume2, VolumeX, Crosshair } from 'lucide-react'
 import { Reveal } from '../components/Reveal'
+import { frameSrc } from '../lib/frames'
 
 const HOTSPOTS = [
   {
@@ -77,7 +78,7 @@ export function CraftSection() {
           {/* Interactive Photo Canvas with Hotspots */}
           <Reveal className="relative overflow-hidden rounded-2xl border border-border bg-surface shadow-xl">
             <img
-              src="/frames/frame-0060.webp"
+              src={frameSrc('frame-0060', { width: 1200 })}
               alt="Detailed view of Ambot365 chair during its assembly sequence"
               className="aspect-[4/3] w-full object-cover sm:aspect-[16/11]"
               loading="lazy"
