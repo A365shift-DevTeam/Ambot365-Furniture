@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { ArrowUpRight, Sun, Sunset, Moon, Sliders, X, Ruler, Sparkles, Check, ChevronRight } from 'lucide-react'
 import { Reveal } from '../components/Reveal'
+import { scrollToTarget, useLenis, useScrollLock } from '../lib/lenis'
 import { frameSrc } from '../lib/frames'
 
 const CATEGORIES = ['All Pieces', 'Rest / Lounge', 'Gather / Dining', 'Focus / Studio', 'Pause / Low']
@@ -70,6 +71,9 @@ export function CollectionSection() {
   const [activeCategory, setActiveCategory] = useState('All Pieces')
   const [activeLighting, setActiveLighting] = useState(LIGHTING_MODES[0])
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const lenis = useLenis()
+
+  useScrollLock(Boolean(selectedProduct))
 
   const filteredPieces = activeCategory === 'All Pieces'
     ? PIECES
@@ -185,7 +189,7 @@ export function CollectionSection() {
 
         {/* Quick View Product Drawer / Modal */}
         {selectedProduct && (
-          <div className="fixed inset-0 z-100 grid place-items-center bg-black/65 backdrop-blur-md p-4">
+          <div data-lenis-prevent className="fixed inset-0 z-100 grid place-items-center bg-black/65 backdrop-blur-md p-4">
             <div className="w-full max-w-2xl overflow-hidden rounded-3xl border border-border bg-surface shadow-2xl animate-in fade-in zoom-in-95 max-h-[90vh] flex flex-col">
               {/* Modal Top Header */}
               <div className="flex items-center justify-between border-b border-border p-6 bg-parchment/60">
@@ -260,8 +264,7 @@ export function CollectionSection() {
                 <button
                   onClick={() => {
                     setSelectedProduct(null)
-                    const contactNode = document.getElementById('contact')
-                    if (contactNode) contactNode.scrollIntoView({ behavior: 'smooth' })
+                    scrollToTarget(lenis, document.getElementById('contact'))
                   }}
                   className="focus-ring flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-display text-xs font-medium uppercase tracking-wider text-surface transition-transform hover:scale-105 active:scale-95"
                 >

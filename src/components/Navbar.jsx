@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
+import { scrollToTarget, useLenis, useScrollLock } from '../lib/lenis'
 
 const links = [
   { label: 'Story', target: 'story' },
@@ -10,11 +11,9 @@ const links = [
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const [isPassedFrames, setIsPassedFrames] = useState(false)
+  const lenis = useLenis()
 
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [open])
+  useScrollLock(open)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,15 +45,9 @@ export function Navbar() {
     setOpen(false)
     const storyId = window.innerWidth >= 1024 ? 'story-desktop' : 'story'
     const targetId = target === 'story' ? storyId : target
-    const node = document.getElementById(targetId)
-    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+    const node = document.getElementById(targetId) ?? document.getElementById(target)
 
-    if (node) {
-      node.scrollIntoView({ behavior, block: 'start' })
-    } else {
-      const fallbackNode = document.getElementById(target)
-      if (fallbackNode) fallbackNode.scrollIntoView({ behavior, block: 'start' })
-    }
+    scrollToTarget(lenis, node)
   }
 
   const isSolidHeader = isPassedFrames || open

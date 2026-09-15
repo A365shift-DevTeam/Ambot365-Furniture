@@ -5,4 +5,4 @@ dist-ssr
 *.log
 .DS_Store
 .env
-env.download
+.env.local
